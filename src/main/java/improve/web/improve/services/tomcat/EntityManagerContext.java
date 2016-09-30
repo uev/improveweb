@@ -2,6 +2,7 @@ package improve.web.improve.services.tomcat;
 
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
+import lombok.extern.java.Log;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,7 @@ import javax.servlet.ServletContextListener;
 /**
  * Created by uev on 29.09.16.
  */
+@Log
 public class EntityManagerContext implements ServletContextListener {
 
     private static EntityManagerFactory emf;
