@@ -1,6 +1,7 @@
 package improve.web.improve.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "prod", schema = "public", catalog = "improveweb")
-public @Data class  ProdEntity {
+public @Data class  ProdEntity implements Serializable {
     @Id @Column(name = "id") private Long id;
     @Basic @Column(name = "name") private String name;
     @Basic @Column(name = "price") private Double price;

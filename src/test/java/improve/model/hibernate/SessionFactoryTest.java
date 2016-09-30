@@ -10,15 +10,16 @@ import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.logging.Logger;
 
 /**
  * Created by uev on 23.09.16.
  */
+
 public class SessionFactoryTest extends TestCase {
 
     protected EntityManager em;
     protected JPQLQuery jpql;
-
 
     @Override
     public void setUp() throws Exception {
@@ -28,6 +29,7 @@ public class SessionFactoryTest extends TestCase {
     }
 
     @Test
+
     public void testSessionFactory() throws Exception {
         QCatEntity qcat = QCatEntity.catEntity;
         em.getTransaction().begin();

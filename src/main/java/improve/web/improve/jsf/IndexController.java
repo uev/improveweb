@@ -2,13 +2,10 @@ package improve.web.improve.jsf;
 
 import improve.web.improve.model.CatEntity;
 import improve.web.improve.services.jpa2.CatService;
-import improve.web.improve.services.tomcat.EntityManagerContext;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.*;
-import java.io.IOException;
 import java.util.List;
 
 /**
