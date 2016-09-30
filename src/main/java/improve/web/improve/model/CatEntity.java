@@ -1,5 +1,8 @@
 package improve.web.improve.model;
 
+import lombok.Data;
+
+
 import javax.persistence.*;
 import java.lang.Long;
 
@@ -8,31 +11,15 @@ import java.lang.Long;
  */
 @Entity
 @Table(name = "cat", schema = "public", catalog = "improveweb")
-public class CatEntity {
+public @Data class CatEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Basic
     @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Override
     public boolean equals(Object o) {

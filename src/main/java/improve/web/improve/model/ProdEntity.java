@@ -1,5 +1,7 @@
 package improve.web.improve.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,40 +10,10 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "prod", schema = "public", catalog = "improveweb")
-public class ProdEntity {
-    private Long id;
-    private String name;
-    private Double price;
-
-    @Id
-    @Column(name = "id")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Basic
-    @Column(name = "price")
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
+public @Data class  ProdEntity {
+    @Id @Column(name = "id") private Long id;
+    @Basic @Column(name = "name") private String name;
+    @Basic @Column(name = "price") private Double price;
 
     @Override
     public boolean equals(Object o) {
