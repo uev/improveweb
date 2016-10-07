@@ -3,9 +3,11 @@ package improve.model.hibernate;
 import static org.mockito.Mockito.*;
 
 import com.google.common.collect.ImmutableMap;
+import com.mysema.query.Tuple;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPADeleteClause;
 import com.mysema.query.jpa.impl.JPAQuery;
+import improve.web.improve.jsf.view.dto.IndexDTO;
 import improve.web.improve.model.CatEntity;
 import improve.web.improve.model.QCatEntity;
 import improve.web.improve.services.jpa2.CatService;
@@ -17,6 +19,7 @@ import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,7 +62,7 @@ public class SessionFactoryTest extends TestCase {
         CatService service = spy(new CatService());
         doReturn(new JPAQuery(em)).when(service).getJPQLQuery(); // overridng
         Map<String, String> filter = ImmutableMap.of("product", "Отбеливатель");
-        Object[] resultList =  service.getList(filter);
-        assertEquals(resultList.length > 0, true);
+        List<IndexDTO> resultList =  service.getList(filter);
+        assertEquals(resultList.size() > 0, true);
     }
 }
