@@ -1,0 +1,12 @@
+#form_filter div  {
+    float: left;
+    margin: 10px;
+}
+
+#div-submit, #viewData {
+    clear: both;
+}
+
+#filter_content {
+    overflow: hidden;
+}

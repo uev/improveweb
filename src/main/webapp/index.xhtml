@@ -3,34 +3,35 @@
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/html">
 
 <h:head>
-
+    <h:outputStylesheet library="primefaces" name="primefaces.css"/>
 </h:head>
 
 <h:body>
 
     <p:panel id="filter" header="Поиск по каталогу">
-        <h:form>
-        <div style="float: left; margin: 10px">
+        <h:form id="form_filter">
+        <div>
             <p:outputLabel for="product"  value="Название:" style="display: block"/>
             <p:inputText id="product" value="#{indexView.product}"/>
         </div>
-        <div style="float: left; margin: 10px">
+        <div>
             <p:outputLabel for="category"  value="Категория:" style="display: block"/>
             <p:inputText id="category" value="#{indexView.category}"/>
         </div>
 
-        <div style="float: left; margin: 10px">
+        <div>
             <p:outputLabel for="priceOf"  value="Цена от:" style="display: block" converter="javax.faces.Double" />
             <p:inputText id="priceOf" value="#{indexView.priceOf}"  />
         </div>
-        <div  style="float: left; margin: 10px">
+        <div>
             <p:outputLabel for="priceTo"  value="Цена до:" style="display: block" converter="javax.faces.Double" />
             <p:inputText id="priceTo" value="#{indexView.priceTo}"  />
         </div>
-        <div style="clear: both"><p:commandButton id="submit" value="Найти" process="@all" actionListener="#{indexView.getList}" update=":viewData"/> </div>
+        <div id="div-submit"><p:commandButton id="submit" value="Найти" process="@all" actionListener="#{indexView.getList}" update=":viewData"/> </div>
         </h:form>
     </p:panel>
 
+    <br/>
     <h:form  id="viewData">
     <p:dataTable  var="item" value="#{indexView.dataTable}">
     <p:column headerText="Id">
