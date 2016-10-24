@@ -3,7 +3,7 @@
     margin: 10px;
 }
 
-#div-submit, #viewData {
+#div-submit, #viewData, #errors {
     clear: both;
 }
 

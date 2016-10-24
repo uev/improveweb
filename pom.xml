@@ -16,7 +16,30 @@
     </properties>
 
     <dependencies>
-    <dependency>
+
+        <dependency>
+            <groupId>org.jboss.test-jsf</groupId>
+            <artifactId>jsf-mock</artifactId>
+            <version>1.1.9</version>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Без этой зависимости никакая валидация не заработает -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
+        <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>2.1.0</version>
@@ -114,7 +137,7 @@
         <artifactId>slf4j-log4j12</artifactId>
         <version>1.6.1</version>
     </dependency>
-</dependencies>
+    </dependencies>
 
     <build>
         <finalName>web</finalName>
@@ -167,4 +190,10 @@
 
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>jboss-releases</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 </project>
