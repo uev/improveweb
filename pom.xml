@@ -199,7 +199,7 @@
                 <executions>
                     <execution>
                         <id>nativeascii</id>
-                        <phase>process-classes</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>

@@ -1,19 +1,12 @@
 package improve.web.improve.jsf;
 
-import com.mysema.query.Tuple;
 import improve.web.improve.ConstantReistry;
 import improve.web.improve.jsf.view.dto.IndexDTO;
-import improve.web.improve.services.jpa2.CatService;
+import improve.web.improve.services.jpa2.FilterService;
 import lombok.Data;
-import lombok.extern.java.Log;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,12 +27,12 @@ public class IndexController implements Serializable {
     public List<IndexDTO> dataTable;
 
 
-    @ManagedProperty("#{categoryService}")
-    private CatService categoryService;
+    @ManagedProperty("#{filterService}")
+    private FilterService filterService;
 
-    public void setCategoryService(CatService service) {
-        if (categoryService == null) {
-            categoryService = service;
+    public void setfilterService(FilterService service) {
+        if (filterService == null) {
+            filterService = service;
         }
     }
 
@@ -50,7 +43,7 @@ public class IndexController implements Serializable {
             put(ConstantReistry.CATALOG_PRICE_TO, priceTo);
             put(ConstantReistry.PRODUCT_NAME, product);
         }};
-        dataTable = categoryService.getList(filter);
-        return dataTable;
+        dataTable = (List<IndexDTO>) filterService.getList(IndexDTO.class,filter);
+        return  dataTable;
     }
 }

@@ -1,26 +1,25 @@
 package improve.model.hibernate;
 
-import static org.mockito.Mockito.*;
-
 import com.google.common.collect.ImmutableMap;
-import com.mysema.query.Tuple;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPADeleteClause;
 import com.mysema.query.jpa.impl.JPAQuery;
+import improve.web.improve.ConstantReistry;
 import improve.web.improve.jsf.view.dto.IndexDTO;
 import improve.web.improve.model.CatEntity;
+import improve.web.improve.model.ProdEntity;
 import improve.web.improve.model.QCatEntity;
-import improve.web.improve.services.jpa2.CatService;
+import improve.web.improve.services.jpa2.FilterService;
 import junit.framework.TestCase;
 import org.junit.Test;
-
-
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.util.List;
 import java.util.Map;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 /**
  * Created by uev on 23.09.16.
@@ -55,14 +54,20 @@ public class SessionFactoryTest extends TestCase {
     }
 
     @Test
-    /**
-     * Overriding some method
-     */
-    public void testGetFilterService() {
-        CatService service = spy(new CatService());
+    public void testGetFilterDtoService() {
+        FilterService service = spy(new FilterService());
         doReturn(new JPAQuery(em)).when(service).getJPQLQuery(); // overridng
-        Map<String, String> filter = ImmutableMap.of("product", "Отбеливатель");
-        List<IndexDTO> resultList =  service.getList(filter);
+        Map<String, String> filter = ImmutableMap.of(ConstantReistry.PRODUCT_NAME, "Отбеливатель");
+        List<IndexDTO> resultList = (List<IndexDTO>) service.getList(IndexDTO.class, filter);
+        assertEquals(resultList.size() > 0, true);
+    }
+
+    @Test
+    public void testGetFilterService() {
+        FilterService service = spy(new FilterService());
+        doReturn(new JPAQuery(em)).when(service).getJPQLQuery(); // overridng
+        Map<String, String> filter = ImmutableMap.of(ConstantReistry.PRODUCT_NAME, "Отбеливатель");
+        List<?> resultList = (List<ProdEntity>) service.getList(ProdEntity.class, filter);
         assertEquals(resultList.size() > 0, true);
     }
 }
