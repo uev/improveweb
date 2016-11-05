@@ -18,7 +18,7 @@ import java.util.Map;
 @ManagedBean(name = "indexView")
 @Data
 @ViewScoped
-public class IndexController implements Serializable {
+public class IndexController {
     private String category;
     private String product;
     private Double priceOf;

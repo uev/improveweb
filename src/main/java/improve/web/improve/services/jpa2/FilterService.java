@@ -63,7 +63,7 @@ public class FilterService {
                     queryParams[index] = entry.getValue();
                     index += 1;
                     Object compValue = args.get(entry.getKey());
-                    if (compValue != null && compValue != "") {
+                    if (compValue instanceof String && ((String) compValue).isEmpty()) {
                         builder.and(entry.getValue().eq(compValue));
                     }
                 }
@@ -74,13 +74,14 @@ public class FilterService {
     }
 
 
+
     public List<?> getList(Object... params) {
         // установим формат ответа функции
         assert(params.length == 2);
         // пара : запрос, параметры
         Pair<JPQLQuery,Object[]> query = getListQuery(params[1]);
         Class cl = (Class) params[0];
-        List<?> res = new ArrayList<>();
+        List<?> res;
         JPQLQuery jpql = query.getKey();
         if (cl != null && cl.getName().contains("DTO")) {
             // временно создадим массив Expression по числу полей в DTO
@@ -102,6 +103,7 @@ public class FilterService {
             res = jpql.list(Projections.bean(cl, queryParams));
         } else {
             // формируем имя переменной для querydsl
+            assert (cl != null);
             char[] value = cl.getSimpleName().toCharArray();
             value[0] = Character.toLowerCase(value[0]);
             Path<?> path = Expressions.path(cl, String.copyValueOf(value));
