@@ -1,46 +1,18 @@
-<?xml-stylesheet href="text.xsl" type="text/xsl"?>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:jml="http://java.sun.com/jsp/jstl/xml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:x="http://java.sun.com/jsp/jstl/xml">
 
 <h:head>
     <h:outputStylesheet library="primefaces" name="primefaces.css"/>
+    <c:import url="text.xsl" var="xslt" />
+    <c:import url="filter.xml" var="filter" />
 </h:head>
 
 <h:body>
-    <filter idForm="2">
-        <form label = "Название:" model="product" target="#{indexView.product}"/>
-        <form label = "Категория:" model="category" target="#{indexView.category}"/>
-        <form label = "Цена от:" model="priceOf" target="#{indexView.priceOf}" converter="javax.faces.Double"/>
-        <form label = "Цена до:" model="priceTo" target="#{indexView.priceTo}" converter="javax.faces.Double"/>
-        <button label= "Найти" process="@all" actionListener="#{indexView.getList}" update=":viewData :form_filter" />
-    </filter>
-
-    <!--<p:panel id="filter" header="Поиск по каталогу">-->
-        <!--<h:form id="form_filter">-->
-        <!--<div>-->
-            <!--<p:outputLabel for="product"  value="Название:" style="display: block"/>-->
-            <!--<p:inputText id="product" value="#{indexView.product}">-->
-                <!--<f:validateLength minimum="1" />-->
-            <!--</p:inputText>-->
-        <!--</div>-->
-        <!--<div>-->
-            <!--<p:outputLabel for="category"  value="Категория:" style="display: block"/>-->
-            <!--<p:inputText id="category" value="#{indexView.category}"/>-->
-        <!--</div>-->
-
-        <!--<div>-->
-            <!--<p:outputLabel for="priceOf"  value="Цена от:" style="display: block" converter="javax.faces.Double" />-->
-            <!--<p:inputText id="priceOf" value="#{indexView.priceOf}"  />-->
-        <!--</div>-->
-        <!--<div>-->
-            <!--<p:outputLabel for="priceTo"  value="Цена до:" style="display: block" converter="javax.faces.Double" />-->
-            <!--<p:inputText id="priceTo" value="#{indexView.priceTo}"  />-->
-        <!--</div>-->
-        <!--<div id="div-submit"><p:commandButton id="submit" value="Найти" process="@all" actionListener="#{indexView.getList}" update=":viewData :form_filter" /> </div>-->
-            <!--<p:messages id="errors" style="display: block"/>-->
-        <!--</h:form>-->
-    <!--</p:panel>-->
+    <x:transform xml="${filter}" xslt="${xslt}" />
 
     <br/>
     <h:form  id="viewData">

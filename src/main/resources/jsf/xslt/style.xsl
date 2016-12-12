@@ -6,13 +6,15 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" version="1.0">
     <xsl:template match="/">
-        <p:panel id="filter" header="{/filter/@headerOfPanel}">
-        <h:form id="{/filter/@idOfForm}">
+        <p:panel id="filter" header="{/filter/@headerPanel}">
+        <h:form id="{/filter/@idForm}">
         <xsl:for-each select="//filter/form">
             <div>
                 <p:outputLabel for="{@model}" value="{@label}" style="display: block"/>
                 <p:inputText id="{@model}" value="{@target}">
-                    <f:validateLength minimum="1" />
+                    <xsl:if test="@validate">
+                        <f:validateLength minimum="1" />
+                    </xsl:if>
                 </p:inputText>
             </div>
         </xsl:for-each>

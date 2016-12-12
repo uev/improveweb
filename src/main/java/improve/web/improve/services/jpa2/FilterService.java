@@ -63,7 +63,7 @@ public class FilterService {
                     queryParams[index] = entry.getValue();
                     index += 1;
                     Object compValue = args.get(entry.getKey());
-                    if (compValue instanceof String && ((String) compValue).isEmpty()) {
+                    if (compValue instanceof String && ((String) compValue).isEmpty() == false) {
                         builder.and(entry.getValue().eq(compValue));
                     }
                 }

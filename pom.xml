@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>improve</groupId>
     <artifactId>web</artifactId>
     <packaging>war</packaging>
@@ -13,10 +12,15 @@
         <java.min.version>1.7</java.min.version>
         <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
         <hibernate.version>5.2.2.Final</hibernate.version>
+        <groovy.version>2.4.7</groovy.version>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.jboss.test-jsf</groupId>
             <artifactId>jsf-mock</artifactId>
@@ -143,7 +147,6 @@
             <version>2.2.0</version>
         </dependency>
     </dependencies>
-
     <build>
         <finalName>web</finalName>
         <plugins>
@@ -184,13 +187,15 @@
                 <password>postgres</password>
             </configuration>
             </plugin>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <packagingExcludes>WEB-INF/lib/groovy*</packagingExcludes>
                 </configuration>
-
             </plugin>
 
             <plugin>
@@ -205,6 +210,16 @@
                         </goals>
                         <configuration>
                             <source>${basedir}/nativascii.groovy</source>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>xsltransform</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>${basedir}/xsltransform.groovy</source>
                         </configuration>
                     </execution>
                 </executions>

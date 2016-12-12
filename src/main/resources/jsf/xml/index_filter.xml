@@ -1,0 +1,8 @@
+<!-- Вёрстка редактируется только по пути /src/main/resources/jsf/xml -->
+<filter idForm="form_filter" headerPanel="Каталог">
+    <form label = "Название:" model="product" target="#{indexView.product}" validate="true"/>
+    <form label = "Категория:" model="category" target="#{indexView.category}"/>
+    <form label = "Цена от:" model="priceOf" target="#{indexView.priceOf}" converter="javax.faces.Double"/>
+    <form label = "Цена до:" model="priceTo" target="#{indexView.priceTo}" converter="javax.faces.Double"/>
+    <button label= "Найти" process="@all" actionListener="#{indexView.getList}" update=":viewData :form_filter" />
+</filter>
